@@ -19,3 +19,10 @@ Thumbs.db
 # Artefactos antiguos
 SwapNest/
 casaswap-mejoras*.html
+home-swap-mysql-ready.zip
+preview/
+TFG
+*.zip
+
+# Configuración de Claude / entrega neutra
+CLAUDE.md
