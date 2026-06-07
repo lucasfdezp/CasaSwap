@@ -1,0 +1,157 @@
+/* ─── CasaSwap Light Design System ─────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg:        #EFF4FA;
+  --bg-2:      #E5EDF6;
+  --surface:   #FFFFFF;
+  --surface-2: #F5F8FD;
+
+  /* Brand */
+  --navy:      #2C4A6E;
+  --navy-2:    #1E3650;
+  --teal:      #3D8B7A;
+  --gold:      #C9A96E;
+  --gold-light:#D4A574;
+  --gold-dark: #b8924d;
+
+  /* Text */
+  --text:      #1E3650;
+  --text-2:    #5B7085;
+  --text-3:    #8FA3B5;
+
+  /* Utility */
+  --border:    rgba(44,74,110,0.10);
+  --border-2:  rgba(44,74,110,0.18);
+  --shadow:    0 2px 16px rgba(30,54,80,0.08);
+  --shadow-lg: 0 8px 36px rgba(30,54,80,0.13);
+  --radius:    16px;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* House emoji cursor */
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='24'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E") 8 8, auto;
+}
+
+a { text-decoration: none; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-2); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--navy), var(--teal));
+  border-radius: 99px;
+}
+
+/* ── Selección ── */
+::selection { background: rgba(44,74,110,0.15); color: var(--navy-2); }
+
+/* ── Utilidades globales ── */
+.glass {
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), var(--shadow);
+}
+
+.text-gold {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold), #f0d898, var(--gold), var(--gold-dark));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerGold 3s linear infinite;
+}
+
+@keyframes shimmerGold {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.btn-gold {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold-dark) 100%);
+  color: #fff;
+  font-weight: 700; font-size: .88rem; letter-spacing: .04em;
+  border: none; border-radius: 100px; cursor: pointer;
+  transition: all .3s ease;
+  box-shadow: 0 4px 20px rgba(201,169,110,0.35);
+  font-family: var(--font-body);
+}
+.btn-gold:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(201,169,110,0.5);
+}
+.btn-gold:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+.btn-navy {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+  color: #fff;
+  font-weight: 700; font-size: .88rem; letter-spacing: .03em;
+  border: none; border-radius: 100px; cursor: pointer;
+  transition: all .3s ease;
+  box-shadow: 0 4px 20px rgba(44,74,110,0.3);
+  font-family: var(--font-body);
+}
+.btn-navy:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(44,74,110,0.45);
+}
+
+.badge-gold {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(201,169,110,0.12);
+  border: 1px solid rgba(201,169,110,0.28);
+  color: var(--gold-dark);
+  font-size: .7rem; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; padding: 5px 14px;
+  border-radius: 100px;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Inputs light ── */
+.input-light {
+  width: 100%; padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: 12px; color: var(--text);
+  font-size: .92rem; outline: none;
+  transition: all .25s;
+  font-family: var(--font-body);
+  box-shadow: inset 0 1px 3px rgba(30,54,80,0.04);
+}
+.input-light:focus {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(44,74,110,0.1);
+}
+.input-light::placeholder { color: var(--text-3); }
+
+/* ── Accesibilidad: respetar prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:       0.01ms !important;
+    animation-iteration-count: 1     !important;
+    transition-duration:      0.01ms !important;
+  }
+}

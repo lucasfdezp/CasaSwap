@@ -1,0 +1,21 @@
+# Dependencias y builds
+node_modules/
+dist/
+.angular/
+*.log
+
+# Subidas locales (en producción se usa Cloudinary)
+backend/uploads/
+
+# Configuración de herramientas / IDE
+.claude/
+graphify-out/
+**/graphify-out/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Artefactos antiguos
+SwapNest/
+casaswap-mejoras*.html
