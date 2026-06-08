@@ -4,6 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 
+// Datos de la sesion que se guardan en el navegador (localStorage)
 export interface SesionUsuario {
   tipo: 'admin' | 'usuario';
   nombre: string;
@@ -11,16 +12,21 @@ export interface SesionUsuario {
   puntos?: number;
 }
 
+/**
+ * Servicio de autenticacion. Gestiona el login de usuarios y administrador,
+ * la persistencia de la sesion en localStorage y el saldo de puntos en vivo.
+ */
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
   private readonly url = environment.apiUrl;
   private readonly KEY = 'casaswap_sesion';
 
-  /** Saldo de puntos del usuario logado (reactivo para la navbar). */
+  /** Saldo de puntos del usuario logado (reactivo para la barra de navegacion). */
   puntos = signal<number>(0);
 
   constructor(private http: HttpClient, private router: Router) {
+    // Al arrancar, recuperamos el saldo guardado de la sesion previa si existe
     const s = this.getSesion();
     if (s?.puntos != null) this.puntos.set(s.puntos);
   }

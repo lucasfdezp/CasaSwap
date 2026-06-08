@@ -1,3 +1,4 @@
+// Punto de entrada de la aplicacion: arranca Angular con su configuracion global.
 import { bootstrapApplication } from '@angular/platform-browser';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';

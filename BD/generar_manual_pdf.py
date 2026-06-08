@@ -163,6 +163,10 @@ code(["C:\\xampp\\htdocs\\casaswap\\"])
 quote("Cada vez que se modifique un .php hay que volver a copiarlo a esa carpeta.")
 
 # ---------- 3 ----------
+heading("Aplicación desplegada", st_h3)
+para("La aplicación está disponible online en: <b>https://casa-swap.vercel.app</b>. "
+     "También puede ejecutarse en local siguiendo los pasos de instalación.")
+
 heading("3 · Puesta en marcha", st_h1)
 numbered([
     "En el <b>Panel de control de XAMPP</b>, arranca <b>Apache</b> y <b>MySQL</b> (en verde).",

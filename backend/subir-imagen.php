@@ -1,4 +1,10 @@
 <?php
+/**
+ * subir-imagen.php - Subida de imagenes al servidor local.
+ * Se mantiene como alternativa para el entorno de desarrollo. En produccion
+ * las fotos se suben directamente a Cloudinary desde el frontend, por lo que
+ * este script no interviene en el despliegue final.
+ */
 
 header("Content-Type: application/json; charset=UTF-8");
 header('Access-Control-Allow-Origin: *');

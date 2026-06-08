@@ -1,3 +1,4 @@
+// Modelo de datos de una vivienda publicada en la plataforma
 export interface Casa {
   id?: number;
   usuario_id: number;

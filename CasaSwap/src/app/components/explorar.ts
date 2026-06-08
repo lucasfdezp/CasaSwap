@@ -614,6 +614,11 @@ import { Casa } from '../models/casa';
     }
   `]
 })
+/**
+ * Componente principal (pagina de inicio). Muestra el catalogo de casas
+ * disponibles con filtros por provincia, tipo y fechas, e incluye el video
+ * de fondo que avanza con el scroll. Al pulsar una casa navega a su ficha.
+ */
 export class ExplorarComponent implements OnInit, AfterViewInit {
 
   @ViewChild('bgVideo') bgVideo!: ElementRef<HTMLVideoElement>;

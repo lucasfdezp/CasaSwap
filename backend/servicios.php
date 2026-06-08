@@ -1,4 +1,11 @@
 <?php
+/**
+ * servicios.php - Punto de entrada de la API.
+ * Recibe peticiones POST con un JSON que incluye el campo "accion" y
+ * delega la operacion correspondiente en la clase Modelo. Devuelve la
+ * respuesta en formato JSON. Incluye las cabeceras CORS necesarias para
+ * que el frontend (alojado en otro dominio) pueda consumir la API.
+ */
 
 header("Content-Type: application/json; charset=UTF-8");
 header('Access-Control-Allow-Origin: *');

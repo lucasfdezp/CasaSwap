@@ -1,3 +1,4 @@
+// Modelo de datos de un usuario registrado en la plataforma
 export interface Usuario {
   id?: number;
   nombre: string;

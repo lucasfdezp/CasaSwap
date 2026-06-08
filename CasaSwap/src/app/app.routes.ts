@@ -7,13 +7,17 @@ import { UsuariosComponent }    from './components/usuarios';
 import { CasasComponent }       from './components/casas';
 import { authGuard, adminGuard } from './guards/auth.guard';
 
+/**
+ * Tabla de rutas de la aplicacion. Las rutas de perfil y de administracion
+ * estan protegidas por guards. La ruta comodin redirige al inicio.
+ */
 export const routes: Routes = [
-  { path: '',         component: ExplorarComponent },
+  { path: '',         component: ExplorarComponent },   // pagina principal (catalogo)
   { path: 'explorar', component: ExplorarComponent },
   { path: 'login',    component: PortadaComponent },
-  { path: 'casa/:id', component: DetalleCasaComponent },
+  { path: 'casa/:id', component: DetalleCasaComponent }, // ficha detallada de una casa
   { path: 'perfil',   component: PerfilComponent,   canActivate: [authGuard] },
   { path: 'usuarios', component: UsuariosComponent, canActivate: [adminGuard] },
   { path: 'casas',    component: CasasComponent,    canActivate: [adminGuard] },
-  { path: '**',       redirectTo: '' }
+  { path: '**',       redirectTo: '' }                  // cualquier ruta no definida vuelve al inicio
 ];

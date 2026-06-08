@@ -1048,6 +1048,11 @@ import { Solicitud, EstadoSolicitud } from '../models/solicitud';
     }
   `]
 })
+/**
+ * Perfil del usuario. Permite editar los datos personales, publicar y
+ * gestionar las casas propias (con subida de fotos y calculo de puntos) y
+ * administrar las solicitudes de alquiler recibidas y enviadas.
+ */
 export class PerfilComponent implements OnInit {
 
   // ── Signals ─────────────────────────────────────────────────────────────

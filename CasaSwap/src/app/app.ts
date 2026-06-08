@@ -255,6 +255,10 @@ import { ToastService } from './services/toast.service';
     .toast-close:hover { opacity: .8; transform: none !important; }
   `]
 })
+/**
+ * Componente raiz de la aplicacion. Contiene la barra de navegacion superior
+ * (con el saldo de puntos del usuario) y el contenedor de avisos emergentes.
+ */
 export class App {
   constructor(
     public auth:  AuthService,

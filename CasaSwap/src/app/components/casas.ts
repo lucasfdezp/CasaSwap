@@ -291,6 +291,10 @@ import { Usuario } from '../models/usuario';
     .msg-subiendo { font-size: .82rem; color: rgba(201,169,110,.6); margin-bottom: 10px; }
   `]
 })
+/**
+ * Panel de administracion de casas. Permite al administrador listar, editar
+ * y eliminar cualquier vivienda publicada en la plataforma.
+ */
 export class CasasComponent implements OnInit {
 
   @ViewChild('inputFile') inputFileRef!: ElementRef<HTMLInputElement>;

@@ -399,6 +399,10 @@ import { Usuario } from '../models/usuario';
     }
   `]
 })
+/**
+ * Pantalla de acceso (login y registro). Gestiona tanto el inicio de sesion
+ * de usuarios y administrador como el alta de nuevos usuarios.
+ */
 export class PortadaComponent implements OnInit {
 
   // Casitas flotantes del fondo

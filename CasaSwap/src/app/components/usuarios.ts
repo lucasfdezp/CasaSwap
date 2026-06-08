@@ -247,6 +247,10 @@ import { Usuario } from '../models/usuario';
     .msg.error { background: rgba(212,160,160,.1); border: 1px solid rgba(212,160,160,.25); color: #D4A0A0; }
   `]
 })
+/**
+ * Panel de administracion de usuarios. Permite al administrador listar,
+ * editar y eliminar los usuarios registrados en la plataforma.
+ */
 export class UsuariosComponent implements OnInit {
 
   usuarios: Usuario[] = [];

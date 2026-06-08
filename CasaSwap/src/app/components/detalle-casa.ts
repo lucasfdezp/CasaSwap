@@ -1168,6 +1168,11 @@ import { Solicitud } from '../models/solicitud';
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(44,74,110,.4); }
   `]
 })
+/**
+ * Ficha detallada de una vivienda (ruta /casa/:id). Muestra la galeria de
+ * fotos con visor a pantalla completa, el mapa real de la ubicacion, los
+ * servicios, la disponibilidad y el formulario para solicitar el alquiler.
+ */
 export class DetalleCasaComponent implements OnInit, OnDestroy {
 
   casa       = signal<Casa | null>(null);

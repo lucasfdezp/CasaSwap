@@ -1,5 +1,7 @@
+// Estados posibles por los que pasa una solicitud de alquiler
 export type EstadoSolicitud = 'pendiente' | 'aceptada' | 'rechazada' | 'cancelada';
 
+// Modelo de una solicitud de alquiler entre inquilino y propietario
 export interface Solicitud {
   id?: number;
   casa_id: number;

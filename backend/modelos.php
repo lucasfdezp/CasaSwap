@@ -1,9 +1,14 @@
 <?php
-
+/**
+ * Clase Modelo: capa de acceso a datos de CasaSwap.
+ * Encapsula todas las consultas a la base de datos MySQL mediante PDO
+ * (usuarios, casas y solicitudes) y la logica del sistema de puntos.
+ */
 class Modelo {
 
     private $pdo;
 
+    // Establece la conexion con la base de datos al instanciar la clase
     public function __CONSTRUCT() {
         try {
             // Credenciales por variables de entorno (Railway) con

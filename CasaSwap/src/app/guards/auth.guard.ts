@@ -2,33 +2,32 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
-// Protege rutas que requieren estar logado (cualquier tipo)
-export const authGuard: CanActivateFn = (route) => {
+/**
+ * Guard de acceso para rutas que exigen sesion iniciada (cualquier tipo de
+ * usuario). Si no hay sesion, redirige a la pantalla de login.
+ */
+export const authGuard: CanActivateFn = () => {
   const auth   = inject(AuthService);
   const router = inject(Router);
-  const sesion = auth.getSesion();
-  const logado = auth.estaLogado();
 
-  console.log('[authGuard] ruta:', route.routeConfig?.path, '| logado:', logado, '| sesion:', sesion);
+  if (auth.estaLogado()) return true;
 
-  if (logado) return true;
-
-  console.warn('[authGuard] Sin sesión → redirigiendo a /login');
+  // Sin sesion no se permite el acceso: se manda al login
   router.navigate(['/login']);
   return false;
 };
 
-// Protege rutas exclusivas del admin
-export const adminGuard: CanActivateFn = (route) => {
+/**
+ * Guard exclusivo del administrador. Protege las secciones de gestion
+ * (usuarios y casas) frente a usuarios normales o visitantes.
+ */
+export const adminGuard: CanActivateFn = () => {
   const auth   = inject(AuthService);
   const router = inject(Router);
-  const esAdmin = auth.esAdmin();
 
-  console.log('[adminGuard] ruta:', route.routeConfig?.path, '| esAdmin:', esAdmin);
+  if (auth.esAdmin()) return true;
 
-  if (esAdmin) return true;
-
-  console.warn('[adminGuard] No es admin → redirigiendo a /');
+  // Si no es administrador se devuelve al inicio
   router.navigate(['/']);
   return false;
 };

@@ -7,9 +7,15 @@ import { Casa } from '../models/casa';
 import { Solicitud } from '../models/solicitud';
 import { environment } from '../../environments/environment';
 
+/**
+ * Servicio central de acceso a la API. Centraliza todas las llamadas HTTP
+ * al backend PHP y la subida de imagenes a Cloudinary. Cada operacion se
+ * envia por POST indicando la accion correspondiente en el cuerpo.
+ */
 @Injectable({ providedIn: 'root' })
 export class ApiService {
 
+  // URL del backend (definida segun el entorno: local o produccion)
   private readonly url = environment.apiUrl;
 
   // Endpoint de subida sin firma de Cloudinary
@@ -18,6 +24,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+  // Metodo auxiliar: todas las peticiones a la API son POST con un JSON
   private post(body: object): Observable<any> {
     return this.http.post(this.url, body);
   }
@@ -60,6 +67,7 @@ export class ApiService {
     return this.post({ accion: 'ListarCasas' });
   }
 
+  // Devuelve el lisatdo de casas marcadas como disponibles (catalogo publico)
   listarCasasDisponibles(): Observable<Casa[]> {
     return this.post({ accion: 'ListarCasasDisponibles' });
   }
@@ -90,8 +98,9 @@ export class ApiService {
     return this.post({ accion: 'ObtenerPuntos', id });
   }
 
-  // --- Solicitudes de alquiler ---
+  // --- Solicitudes de alquiler (sistema de puntos) ---
 
+  // Crea una solicitud de alquiler sobre una casa. Queda pendiente de aprobacion
   crearSolicitud(solicitud: Solicitud): Observable<{ result: string; error?: string }> {
     return this.post({ accion: 'CrearSolicitud', solicitud });
   }
