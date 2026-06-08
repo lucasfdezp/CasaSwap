@@ -36,6 +36,30 @@ st_toc  = S('toc', fontName='Helvetica', fontSize=11, leading=20, textColor=DARK
 
 story = []
 
+# Dibuja el logotipo de CasaSwap (dos casas con flechas de intercambio)
+# reconstruido con primitivas de reportlab a partir del SVG original.
+def draw_logo(c, cx, top, s):
+    h_izq = [(2,12.5),(9.5,5),(17,12.5),(17,22.5),(13.5,22.5),(13.5,17.5),(5.5,17.5),(5.5,22.5),(2,22.5)]
+    h_der = [(39,12.5),(46.5,5),(54,12.5),(54,22.5),(50.5,22.5),(50.5,17.5),(42.5,17.5),(42.5,22.5),(39,22.5)]
+    TX = lambda x: cx + (x - 28) * s
+    TY = lambda y: top - y * s
+    c.saveState()
+    c.setLineCap(1); c.setLineJoin(1)
+    def casa(pts, col):
+        c.setStrokeColor(col); c.setLineWidth(1.5 * s)
+        p = c.beginPath(); p.moveTo(TX(pts[0][0]), TY(pts[0][1]))
+        for (x, y) in pts[1:]: p.lineTo(TX(x), TY(y))
+        p.close(); c.drawPath(p, stroke=1, fill=0)
+    casa(h_izq, NAVY); casa(h_der, TEAL)
+    c.setLineWidth(1.2 * s)
+    c.setStrokeColor(NAVY)
+    p = c.beginPath(); p.moveTo(TX(19), TY(10)); p.curveTo(TX(22), TY(6.5), TX(26), TY(6.5), TX(28), TY(7)); c.drawPath(p, stroke=1, fill=0)
+    c.line(TX(28), TY(7), TX(26.2), TY(5))
+    c.setStrokeColor(TEAL)
+    p = c.beginPath(); p.moveTo(TX(37), TY(18)); p.curveTo(TX(34), TY(21.5), TX(30), TY(21.5), TX(28), TY(21)); c.drawPath(p, stroke=1, fill=0)
+    c.line(TX(28), TY(21), TX(29.8), TY(23))
+    c.restoreState()
+
 def h1(t): story.append(Paragraph(t, st_h1))
 def h2(t): story.append(Paragraph(t, st_h2))
 def p(t):  story.append(Paragraph(t, st_body))
@@ -63,7 +87,7 @@ def table(headers, rows, col_widths=None, center=None):
     story.append(t); story.append(Spacer(1,9))
 
 # ───────── PORTADA ─────────
-story.append(Spacer(1, 55*mm))
+story.append(Spacer(1, 52*mm))   # hueco superior (el logo se dibuja por canvas)
 story.append(Paragraph("CasaSwap", S('cv', fontName='Helvetica-Bold', fontSize=48, leading=52, textColor=NAVY, alignment=TA_CENTER)))
 story.append(Spacer(1, 5*mm))
 story.append(Paragraph("Documentación Técnica del Proyecto", S('cv2', fontName='Helvetica', fontSize=19, textColor=TEAL, alignment=TA_CENTER)))
@@ -72,7 +96,10 @@ story.append(HRFlowable(width="45%", thickness=1.2, color=colors.HexColor("#C9D4
 story.append(Spacer(1, 9*mm))
 story.append(Paragraph("Plataforma de intercambio de viviendas en España<br/>mediante un sistema de puntos",
                        S('cv3', fontName='Helvetica', fontSize=12.5, leading=18, textColor=GREY, alignment=TA_CENTER)))
-story.append(Spacer(1, 40*mm))
+story.append(Spacer(1, 32*mm))
+story.append(Paragraph("Lucas Fernández Peña",
+                       S('cvaut', fontName='Helvetica-Bold', fontSize=14, textColor=DARK, alignment=TA_CENTER)))
+story.append(Spacer(1, 3*mm))
 story.append(Paragraph("Proyecto Intermodular (PiM) · Desarrollo de Aplicaciones Web",
                        S('cv4', fontName='Helvetica', fontSize=11, textColor=GREY, alignment=TA_CENTER)))
 story.append(Spacer(1, 2*mm))
@@ -298,14 +325,18 @@ story.append(Spacer(1, 6))
 story.append(Paragraph("CasaSwap · Documentación técnica · Proyecto Intermodular DAW",
                        S('foot', fontName='Helvetica-Oblique', fontSize=9.5, textColor=GREY, alignment=TA_CENTER)))
 
+# Portada: solo el logotipo, sin numero de pagina
+def first_page(canvas, doc):
+    draw_logo(canvas, A4[0] / 2, A4[1] - 26*mm, 2.3)
+
+# Resto de paginas: pie con numeracion
 def footer(canvas, doc):
     canvas.saveState()
     canvas.setFont('Helvetica', 8); canvas.setFillColor(GREY)
-    if doc.page > 1:
-        canvas.drawCentredString(A4[0]/2, 12*mm, f"CasaSwap · Documentación técnica   —   {doc.page}")
+    canvas.drawCentredString(A4[0]/2, 12*mm, f"CasaSwap · Documentación técnica   —   {doc.page}")
     canvas.restoreState()
 
 doc = SimpleDocTemplate(OUT, pagesize=A4, leftMargin=22*mm, rightMargin=22*mm,
                         topMargin=20*mm, bottomMargin=18*mm, title="CasaSwap - Documentación Técnica")
-doc.build(story, onFirstPage=footer, onLaterPages=footer)
+doc.build(story, onFirstPage=first_page, onLaterPages=footer)
 print("PDF generado en:", OUT)
