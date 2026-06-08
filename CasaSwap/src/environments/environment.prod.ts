@@ -4,10 +4,9 @@ export const environment = {
   production: true,
 
   // URL pública del backend en Railway (termina en /servicios.php)
-  // Ejemplo: 'https://casaswap-backend-production.up.railway.app/servicios.php'
-  apiUrl: 'https://TU-BACKEND.up.railway.app/servicios.php',
+  apiUrl: 'https://casaswap-production.up.railway.app/servicios.php',
 
   // Cloudinary
-  cloudinaryCloud:  'TU_CLOUD_NAME',
+  cloudinaryCloud:  'dagoywcaj',
   cloudinaryPreset: 'casaswap_unsigned',
 };

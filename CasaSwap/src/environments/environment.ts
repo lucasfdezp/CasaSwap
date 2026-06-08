@@ -6,7 +6,7 @@ export const environment = {
   // API PHP (en local va por el proxy de Angular)
   apiUrl: '/casaswap/servicios.php',
 
-  // Cloudinary (subida de imágenes) — rellena con tus datos
-  cloudinaryCloud:  'TU_CLOUD_NAME',
+  // Cloudinary (subida de imágenes)
+  cloudinaryCloud:  'dagoywcaj',
   cloudinaryPreset: 'casaswap_unsigned',
 };
